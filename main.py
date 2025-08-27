@@ -51,4 +51,5 @@ async def on_message(message):
             await message.channel.send(embed=embed)
             last_sent[USER_ID_4] = now
 
-client.run(TOKEN)
+if __name__ == "__main__":
+    client.run(TOKEN)
