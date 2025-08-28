@@ -15,10 +15,18 @@ GIF_URL_2 = "https://c.tenor.com/hBFJV2kNYBQAAAAd/tenor.gif"
 GIF_URL_3 = ""
 GIF_URL_4 = "https://c.tenor.com/cgWc0q0vIU0AAAAd/tenor.gif"
 
+# Discord Intents konfigurieren
+""" The line intents = discord.Intents.default() creates 
+an instance of the Intents class from the discord library, using
+ its default() factory method. In the context of Discord bots, 
+"intents" are a way to specify which types of events your bot wants to receive from 
+Discord's API.  """
+
 intents = discord.Intents.default()
 intents.message_content = True
 
 client = discord.Client(intents=intents)
+KEYWORDS = ["Asiate", "DCs", "Roster", "heul"]
 
 # Dictionary für Zeit-Tracking pro User
 last_sent = {}
@@ -28,12 +36,14 @@ async def on_message(message):
     now = datetime.now()
     # User 1 lou
     if message.author.id == USER_ID_1:
-        last_time = last_sent.get(USER_ID_1)
-        if not last_time or now - last_time > timedelta(hours=1):
-            embed = discord.Embed(title="Cry Me A GAC-River")
-            embed.set_image(url=GIF_URL_1)
-            await message.channel.send(embed=embed)
-            last_sent[USER_ID_1] = now
+        content = message.content.lower()
+        if any(word in content for word in KEYWORDS):
+            last_time = last_sent.get(USER_ID_1)
+            if not last_time or now - last_time > timedelta(hours=1):
+                embed = discord.Embed(title="Cry Me A GAC-River")
+                embed.set_image(url=GIF_URL_1)
+                await message.channel.send(embed=embed)
+                last_sent[USER_ID_1] = now
     # User 2 (beachte: .id , nicht == Objekt) igod
     elif message.author.id == USER_ID_2:
         last_time = last_sent.get(USER_ID_2)
