@@ -26,7 +26,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = discord.Client(intents=intents)
-KEYWORDS = ["Asiate", "DCs", "Roster", "heul","verloren"]
+KEYWORDS = ["Asiate", "DCs", "Roster", "heulen","verloren", "DC", "Japaner", "FDC"]
 
 # Dictionary für Zeit-Tracking pro User
 last_sent = {}
